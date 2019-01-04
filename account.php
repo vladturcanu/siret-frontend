@@ -1,8 +1,10 @@
 <?php
     session_start();
 
-    if (isset($_POST["username"]) &&
-        isset($_POST["password"])) {            
+    if (isset($_GET["logout"])) {
+        session_unset();
+    } else if (isset($_POST["username"]) &&
+            isset($_POST["password"])) {            
 
         /* Log the user in */
         $username = $_POST["username"];
@@ -76,7 +78,7 @@
     ?>
     <div class="container">
         <div class="account-details">
-            <h2>My Account</h2>
+            <h2 class="page-title">My Account</h2>
             
             <?php if (isset($error)): ?>
                 <p class="error-msg"><?= $error ?></p>
@@ -114,6 +116,7 @@
                     </div>
                 </div>
             <?php endif; ?>
+            <a href="account.php?logout" class="btn btn-primary mt-2">Logout</a>
         </div>
     </div>
 <?php else: ?>

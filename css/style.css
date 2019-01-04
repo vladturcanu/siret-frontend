@@ -34,9 +34,13 @@ body {
 }
 
 .error-msg {
-    background-color: rgb(224, 169, 169);
-    color: rgb(231, 58, 58);
+    background-color: rgb(245, 207, 207);
+    color: rgb(145, 36, 36);
     padding: 8px 16px;
+}
+
+.hidden {
+    display: none;
 }
 
 
@@ -112,12 +116,36 @@ body {
     width: 250px;
 }
 
-.account-details {
+.page-title {
     margin-top: 50px;
 }
 
 .account-details table td {
     padding: 2px 8px;
+}
+
+
+/*
+ * Incidents
+ */
+#incidents-table,
+.custom-table {
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+#incidents-table td,
+#incidents-table th,
+.custom-table td,
+.custom-table th {
+    padding: 12px 12px;
+    text-align: center;
+}
+
+#incidents-table th,
+.custom-table th {
+    background-color: #333;
+    color: #fff;
 }
 
 
