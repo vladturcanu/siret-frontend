@@ -1,9 +1,7 @@
 <?php
     session_start();
+    include "variables.php";
     $page_title = "Generate Sensor Data";
-    $active_map = "active";
-    $active_incidents = "";
-    $active_account = "";
     include "header.php";
 ?>
 

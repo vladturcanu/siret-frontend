@@ -18,15 +18,14 @@
 /*
  * Base structure
  */
-
-html,
-body {
-    height: 100%;
+html, body {
+    min-height: 100vh;
 }
 
 body {
     color: #000;
     box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+    overflow: auto;
 }
 
 .container {
@@ -39,10 +38,65 @@ body {
     padding: 8px 16px;
 }
 
+.success-msg {
+    background-color: rgb(215, 245, 207);
+    color: rgb(52, 145, 36);
+    padding: 8px 16px;
+}
+
+.info-msg {
+    background-color: rgb(207, 210, 245);
+    color: rgb(36, 61, 145);
+    padding: 8px 16px;
+}
+
 .hidden {
     display: none;
 }
 
+.red {
+    color: rgb(145, 36, 36);
+}
+
+.green {
+    color: rgb(5, 85, 5);
+}
+
+.bg-red {
+    background-color: rgb(100, 9, 9);
+    color: #fff;
+}
+
+.bg-green {
+    background-color: rgb(8, 73, 8);
+    color: #fff;
+}
+
+.bg-blue {
+    background-color: rgb(3, 35, 139);
+    color: #fff;
+}
+
+.bg-purple {
+    background-color: rgb(127, 3, 199);
+    color: #fff;
+}
+
+.bg-light-blue {
+    background-color: rgb(2, 126, 120);
+    color: #fff;
+}
+
+.label {
+    padding: 4px 8px;
+    border-radius: 3px;
+}
+
+.title-small {
+    margin: 0;
+    padding: 0;
+    color: rgb(5, 85, 5);
+}
 
 /*
  * Header
@@ -108,7 +162,7 @@ body {
 .form-logo {
     height: 130px;
     width: 130px;
-    margin-top: 100px;
+    margin-top: 60px;
     margin-bottom: 0px;
 }
 
@@ -148,6 +202,32 @@ body {
     color: #fff;
 }
 
+/*
+ * Admin Panel
+ */
+.admin-userTable {
+    text-align: center;
+}
+
+.admin-btnValidate {
+    padding: 4px 8px;
+    margin-top: -6px;
+}
+
+/*
+ * Register
+ */
+.form-signin {
+    min-width: 300px;
+}
+
+.form-signin label {
+    margin-top: 12px;
+}
+
+.form-signin label:first-child {
+    margin-top: 0px;
+}
 
 /*
  * Footer

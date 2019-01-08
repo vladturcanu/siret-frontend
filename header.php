@@ -32,6 +32,14 @@
                 <a class="nav-link <?= $active_map ?>" href="index.php">Map</a>
                 <a class="nav-link <?= $active_incidents ?>" href="incidents.php">Incidents</a>
                 <a class="nav-link <?= $active_account ?>" href="account.php">Account</a>
+
+                <?php if (isset($_SESSION["token"]) && $_SESSION["type"] == "admin"): ?>
+                    <a class="nav-link <?= $active_admin ?>" href="admin_panel.php">Admin Panel</a>
+                <?php endif; ?>
+
+                <?php if (!isset($_SESSION["token"])): ?>
+                    <a class="nav-link <?= $active_register ?>" href="register.php">Register</a>
+                <?php endif; ?>
             </nav>
             <div class="clearfix"></div>
         </div>

@@ -1,9 +1,8 @@
 <?php
     session_start();
+    include "variables.php";
     $page_title = "Incidents";
-    $active_map = "";
     $active_incidents = "active";
-    $active_account = "";
     include "header.php";
 ?>
 
@@ -68,13 +67,22 @@
             </tbody>
         </table>
 
-        <?php if (isset($_SESSION["type"]) && $_SESSION["type"] == "admin"): ?>
-            <a href="#" id="link-add-incident" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal">Add Incident</a>
+        <?php if (isset($_SESSION["type"]) && ($_SESSION["type"] == "admin" || $_SESSION["type"] == "volunteer")): ?>
+            <a href="#" id="link-add-incident" class="btn btn-primary" data-toggle="modal" data-target="#add-incident-modal" onclick="checkIsValid(event);">Add Incident</a>
         <?php endif; ?>
     </div>
 </div>
 
 <script>
+    function checkIsValid(event) {
+        var isValid = "<?= $_SESSION['is_valid'] ?>";
+
+        if (isValid == "false") {
+            alert("Your account must be validated by an admin before you can report incidents.");    
+            event.stopPropagation();
+        }
+    }
+
     function clearIncidentModal() {
         $("#add-incident-modal input").val("");
         $("#add-incident-modal textarea").val("");

@@ -42,9 +42,8 @@
 ?>
 
 <?php
+    include "variables.php";
     $page_title = "Your Account";
-    $active_map = "";
-    $active_incidents = "";
     $active_account = "active";
     include "header.php";
 ?>
@@ -73,6 +72,19 @@
 
             if (isset($res["error"])) {
                 $error = $res["error"];
+            }
+
+            $is_valid = "";
+            if ($res["is_valid"]) {
+                $is_valid = "<span class='label bg-green'>Yes</span>";
+            } else {
+                $is_valid = "<span class='label bg-red'>No</span>";
+            }
+
+            if ($res['type'] == "admin") {
+                $res['type'] = "<span class='label bg-purple'>Admin</span>";
+            } else {
+                $res['type'] = "<span class='label bg-light-blue'>Volunteer</span>";
             }
         }
     ?>
@@ -109,7 +121,7 @@
                                 </tr>
                                 <tr>
                                     <td><strong>Validated:</strong></td>
-                                    <td><?= $res["is_valid"] ?></td>
+                                    <td><?= $is_valid ?></td>
                                 </tr>
                             </tbody>
                         </table>
