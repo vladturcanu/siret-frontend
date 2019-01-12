@@ -18,7 +18,25 @@
     <!-- End Font Awesome -->
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+
+    <!--PlotLy-->
+    <!-- <script src="plotly-latest.min.js"></script> -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Arcgis -->
+    <link rel="stylesheet" href="https://js.arcgis.com/3.27/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.27/esri/css/esri.css">
+    <script src="https://js.arcgis.com/3.27/" data-dojo-config="async:true"></script>
+
     <script src="js/main.js"></script>
+
+    <style>
+    #map {
+        height: 100%;
+        width: 100%
+    }
+    </style>
+    
 </head>
 <body>
     <div class="topbar">

@@ -29,7 +29,25 @@
     getSensorData();
 
     /* TODO: Write code to display map using data in sensorData. Map will be drawn in the div#map */
+    var map, csv;
+
+      require([
+        "dojo/parser",
+        "esri/arcgis/utils",
+        "dojo/domReady!"
+      ], function(
+         parser, arcgisUtils
+      ) {
+
+        parser.parse();
+
+        arcgisUtils.createMap("4e4bb7c2ffcb4ea68b728e183b36740f", "map").then(function (response) {
+        map = response.map;
+        });
+    
+      });
 </script>
+
 <?php
     include "footer.php";
 ?>
