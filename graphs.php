@@ -68,13 +68,6 @@
                             graphData["x"].push(dataPoint['timestamp']['date']);
                             graphData["y"].push(dataPoint['value']);
                         }
-                        // var data = [
-                        //     {
-                        //         x: ['2019-01-04 14:10:26.000000', '2019-01-04 14:10:29.000000', '2019-01-04 14:10:30.000000'],
-                        //         y: [9, 10, 8],
-                        //         type: 'scatter'
-                        //     }
-                        // ];
 
                         var plotlyData = [graphData];
                         Plotly.newPlot('graph', [graphData]);

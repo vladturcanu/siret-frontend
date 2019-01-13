@@ -18,11 +18,6 @@
             .done(function(data) {
                 /* Save data to global array */
                 sensorData = data;
-
-                /* In order to see the sensor data, open the browser console (F12) and browse through the object */
-                console.log(sensorData);
-
-                /* Might need to wait until this point to start displaying the map. This is async. You only have the sensor data once you reach this point. */
             });
     }
 
@@ -30,21 +25,21 @@
 
     var map, csv;
 
-      require([
+    require([
         "dojo/parser",
         "esri/arcgis/utils",
         "dojo/domReady!"
-      ], function(
-         parser, arcgisUtils
-      ) {
+    ], function(
+        parser, arcgisUtils
+    ) {
 
         parser.parse();
 
         arcgisUtils.createMap("4e4bb7c2ffcb4ea68b728e183b36740f", "map").then(function (response) {
         map = response.map;
         });
-    
-      });
+
+    });
 </script>
 
 <?php

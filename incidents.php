@@ -173,6 +173,32 @@
             });
     }
 
+    function deleteIncident(incidentId) {
+        if (!incidentId) {
+            alert("No incident id supplied");
+            return;
+        }
+
+        var postData = JSON.stringify({
+            "id": incidentId,
+            "token": "<?= $_SESSION['token'] ?>"
+        });
+
+        $.post("https://serene-cove-78266.herokuapp.com/delete_incident", postData)
+            .done(function(data) {
+                if (data["error"]) {
+                    alert(data["error"]);
+                    return;
+                } else {
+                    populateIncidentsTable();
+                    alert(data["message"]);
+                }
+            })
+            .fail(function(data) {
+                alert("Connection to the server could not be established. Please try again.")
+            });
+    }
+
     function populateIncidentsTable() {
         var accountType = "<?= $_SESSION['type'] ?>";
         var tableBody = $("#incidents-table tbody");
@@ -219,7 +245,7 @@
                             break;
                     }
 
-                    var btnDelete = `<button class="btn btn-danger incidents-btnMarkAs" type="button">Delete</button>`;
+                    var btnDelete = `<button class="btn btn-danger incidents-btnMarkAs" type="button" onclick="deleteIncident(${data[i]['id']});">Delete</button>`;
 
                     var row = `
                         <tr>

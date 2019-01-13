@@ -20,6 +20,7 @@
  */
 html, body {
     min-height: 100vh;
+    position: relative;
 }
 
 body {
@@ -145,6 +146,9 @@ body {
 
 .clearfix {
     clear: both;
+    display: block;
+    height: 40px;
+    width: 100%;
 }
 
 .nav-link {
@@ -224,6 +228,11 @@ body {
     margin-top: -6px;
 }
 
+.admin-createAdminCard {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
 /*
  * Register
  */
@@ -231,11 +240,13 @@ body {
     min-width: 300px;
 }
 
-.form-signin label {
+.form-signin label,
+.form-createAdmin label {
     margin-top: 12px;
 }
 
-.form-signin label:first-child {
+.form-signin label:first-child,
+.form-createAdmin label:first-child {
     margin-top: 0px;
 }
 
@@ -251,4 +262,18 @@ div#map {
  */
 .mastfoot {
     color: rgba(255, 255, 255, .5);
+}
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 16px 0px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+
+.copyright {
+    margin-bottom: 0;
 }
