@@ -28,7 +28,6 @@
 
     getSensorData();
 
-    /* TODO: Write code to display map using data in sensorData. Map will be drawn in the div#map */
     var map, csv;
 
       require([

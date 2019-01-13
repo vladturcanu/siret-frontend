@@ -1,4 +1,5 @@
 <?php
+    /* We get to this page through a link in the Map, when showing details of a sensor. */
     session_start();
     $page_title = "Siret Map";
     $active_map = "";
@@ -7,28 +8,89 @@
     include "header.php";
 ?>
 
-<div id="graph">
-</div>
+<?php
+    if (isset($_GET["parameter"]) &&
+        isset($_GET["location"]) &&
+        $_GET["parameter"] != "" &&
+        $_GET["location"] != "") 
+    {
+        $parameter = $_GET["parameter"];
+        $location = $_GET["location"];
 
-<script>
-    /* We get to this page through a link in the Map, when showing details of a sensor.
-      Make that link appear on the bottom of the sensor details window.
-      Link will be as follows: http://localhost/siret-frontend/graphs.php?parameter=<param>&location=<locatie>
-      If you can make 2 links, send "parameter" as well.
-      Otherwise, send only location and we will draw both ph and turbidity
-    */
-
-    var data = [
-        {
-            x: ['2019-01-04 14:10:26.000000', '2019-01-04 14:10:29.000000', '2019-01-04 14:10:30.000000'],
-            y: [9, 10, 8],
-            type: 'scatter'
+        if ($parameter == "ph") {
+            $display_parameter = "PH";
+        } else {
+            $display_parameter = "turbidity";
         }
-    ];
+    } else {
+        $error = "Please specify in your GET request the location of the sensor and the measured parameter.";
+    }
+?>
+       
+<?php if (isset($error)): ?>
 
-    Plotly.newPlot('graph', data);
-    
-</script>
+    <p class="error-msg"><?= $error ?></p>
+
+<?php else: ?>
+    <div class="container">
+        <h3 class="page-title">Measured <?= $display_parameter; ?> values near <?= ucfirst($location); ?></h3>
+    </div>
+    <div id="please-wait">Please wait. Fetching data...</div>
+    <div id="graph">
+    </div>
+
+    <script>
+        function plotData() {
+            var parameter = "<?= $parameter ?>";
+            var location = "<?= $location ?>";
+
+            var postData = JSON.stringify({
+                "parameter": parameter,
+                "location": location
+            });
+
+            /* Fetch data */
+            $.post("https://serene-cove-78266.herokuapp.com/get_sensor_data", postData)
+                .done(function(data) {
+                    if (data["error"]) {
+                        $("#please-wait").html("<p class='error-msg'>"+data["error"]+"</p>");
+                    } else {
+                        /* Arrange data for graph */
+                        var graphData = {
+                            x: [],
+                            y: [],
+                            type: 'scatter'
+                        };
+
+                        for (var i = 0; i < data.length; i++) {
+                            var dataPoint = data[i];
+
+                            graphData["x"].push(dataPoint['timestamp']['date']);
+                            graphData["y"].push(dataPoint['value']);
+                        }
+                        // var data = [
+                        //     {
+                        //         x: ['2019-01-04 14:10:26.000000', '2019-01-04 14:10:29.000000', '2019-01-04 14:10:30.000000'],
+                        //         y: [9, 10, 8],
+                        //         type: 'scatter'
+                        //     }
+                        // ];
+
+                        var plotlyData = [graphData];
+                        Plotly.newPlot('graph', [graphData]);
+
+                        $("#please-wait").html("");
+                    }
+                })
+                .fail(function() {
+                    $("#please-wait").html("<p class='error-msg'>Could not establish connection with the server. Please refresh the page.</p>");
+                });
+        }
+
+        plotData();
+    </script>
+
+<?php endif; ?>
 
 <?php
     include "footer.php";

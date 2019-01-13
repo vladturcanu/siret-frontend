@@ -230,6 +230,13 @@ body {
 }
 
 /*
+ * Map
+ */
+div#map {
+    height: 100vh;
+}
+
+/*
  * Footer
  */
 .mastfoot {
