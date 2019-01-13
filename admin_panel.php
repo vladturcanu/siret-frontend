@@ -63,6 +63,26 @@
             });
     }
 
+    function invalidateUser(username) {
+        var postData = JSON.stringify({
+            "token": "<?= $_SESSION['token'] ?>",
+            "username": username
+        });
+
+        $.post("https://serene-cove-78266.herokuapp.com/invalidate_user", postData)
+            .done(function(data) {
+                if (data["error"]) {
+                    alert(data["error"]);
+                } else {
+                    getUsers();
+                    alert(data["message"]);
+                }
+            })
+            .fail(function() {
+                alert("Invalidate user: request failed. Please try again.");
+            });
+    }
+
     function getUsers() {
         var postData = JSON.stringify({
             "token": "<?= $_SESSION['token'] ?>"
@@ -87,9 +107,12 @@
                         var btnValidate = "";
                         if (user['is_valid']) {
                             validated = "<span class='label bg-green'>Yes</span>";
+                            if (user['username'] != "<?= $_SESSION['username'] ?>") 
+                                btnValidate = `<button class="btn btn-danger admin-btnValidate" onclick="invalidateUser('${user['username']}')">Invalidate</button>`;
                         } else {
                             validated = "<span class='label bg-red'>No</span>";
-                            btnValidate = `<button class="btn btn-primary admin-btnValidate" onclick="validateUser('${user['username']}')">Validate</button>`;
+                            if (user['username'] != "<?= $_SESSION['username'] ?>") 
+                                btnValidate = `<button class="btn btn-primary admin-btnValidate" onclick="validateUser('${user['username']}')">Validate</button>`;
                         }
 
                         var userType = "";

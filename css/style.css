@@ -91,6 +91,11 @@ body {
     color: #fff;
 }
 
+.bg-grey {
+    background-color: rgb(83, 83, 83);
+    color: #fff;
+}
+
 .label {
     padding: 4px 8px;
     border-radius: 3px;
@@ -213,7 +218,8 @@ body {
     text-align: center;
 }
 
-.admin-btnValidate {
+.admin-btnValidate,
+.incidents-btnMarkAs {
     padding: 4px 8px;
     margin-top: -6px;
 }

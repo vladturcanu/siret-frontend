@@ -129,6 +129,7 @@
                 </div>
             <?php endif; ?>
             <a href="account.php?logout" class="btn btn-primary mt-2">Logout</a>
+            <a href="account.php?logout" class="btn btn-info mt-2 ml-2">Edit details</a>
         </div>
     </div>
 <?php else: ?>
