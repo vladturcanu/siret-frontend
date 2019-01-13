@@ -40,6 +40,19 @@
     </div>
 
     <script>
+        function sortAxesByDate(axisPoint1, axisPoint2) {
+            /* This is a comparison function that will result in dates being sorted in ASCENDING order. */
+            var date1 = axisPoint1["x"];
+            var date2 = axisPoint2["x"];
+
+            var date1_value = Date.parse(date1);
+            var date2_value = Date.parse(date2);
+
+            if (date1_value > date2_value) return 1;
+            if (date1_value < date2_value) return -1;
+            return 0;
+        };
+
         function plotData() {
             var parameter = "<?= $parameter ?>";
             var location = "<?= $location ?>";
@@ -62,15 +75,35 @@
                             type: 'scatter'
                         };
 
+                        var layout = {
+                            xaxis: {
+                                title: "Measurement Date"
+                            },
+                            yaxis: {
+                                title: "Value"
+                            }
+                        }
+
+                        /* Put data in axes array, then sort it by date ascending */
+                        var axes = [];
                         for (var i = 0; i < data.length; i++) {
                             var dataPoint = data[i];
 
-                            graphData["x"].push(dataPoint['timestamp']['date']);
-                            graphData["y"].push(dataPoint['value']);
+                            axes.push({
+                                "x": dataPoint['timestamp']['date'],
+                                "y": dataPoint['value']
+                            });
+                        }
+
+                        axes.sort(sortAxesByDate);
+
+                        for (var i = 0; i < axes.length; i++) {
+                            graphData["x"].push(axes[i]["x"]);
+                            graphData["y"].push(axes[i]["y"]);
                         }
 
                         var plotlyData = [graphData];
-                        Plotly.newPlot('graph', [graphData]);
+                        Plotly.newPlot('graph', [graphData], layout);
 
                         $("#please-wait").html("");
                     }

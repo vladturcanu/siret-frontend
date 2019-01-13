@@ -187,7 +187,6 @@
                 } else {
                     var userData = "";
 
-                    console.log(data);
                     for (var i = 0; i < data.length; i++) {
                         user = data[i];
 
