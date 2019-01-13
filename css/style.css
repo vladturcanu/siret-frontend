@@ -62,6 +62,10 @@ body {
     color: rgb(5, 85, 5);
 }
 
+.blue {
+    color: rgb(3, 35, 139);
+}
+
 .bg-red {
     background-color: rgb(100, 9, 9);
     color: #fff;

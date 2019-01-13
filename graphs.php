@@ -18,9 +18,9 @@
         $location = $_GET["location"];
 
         if ($parameter == "ph") {
-            $display_parameter = "PH";
+            $display_parameter = "<span class='label bg-blue'>pH</span>";
         } else {
-            $display_parameter = "turbidity";
+            $display_parameter = "<span class='label bg-green'>turbidity</span>";
         }
     } else {
         $error = "Please specify in your GET request the location of the sensor and the measured parameter.";
@@ -33,7 +33,7 @@
 
 <?php else: ?>
     <div class="container">
-        <h3 class="page-title">Measured <?= $display_parameter; ?> values near <?= ucfirst($location); ?></h3>
+        <h3 class="page-title">Measured <?= $display_parameter; ?> values near <span class="blue"><?= ucfirst($location); ?></span></h3>
     </div>
     <div id="please-wait">Please wait. Fetching data...</div>
     <div id="graph">
